@@ -27,9 +27,9 @@ public class Exam {
 
     @NotNull(message = "Attempts must not be null")
     @PositiveOrZero(message = "Attempts must be positive")
-    private int attempts;
+    private Integer attempts;
 
     @NotNull(message = "Correct Attempts must not be null")
     @PositiveOrZero(message = "Correct Attempts must be positive")
-    private int correctAttempts;
+    private Integer correctAttempts;
 }
