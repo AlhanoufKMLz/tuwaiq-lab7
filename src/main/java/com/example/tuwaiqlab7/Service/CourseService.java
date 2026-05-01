@@ -1,7 +1,6 @@
 package com.example.tuwaiqlab7.Service;
 
 import com.example.tuwaiqlab7.Model.Course;
-import com.example.tuwaiqlab7.Model.Exam;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
