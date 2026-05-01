@@ -64,7 +64,7 @@ public class ExamController {
 
         if(rate == -1)
             return ResponseEntity.status(404).body(new ApiResponse("No exam with ID: " + id + " found."));
-        if(rate == 0)
+        if(rate == -2)
             return ResponseEntity.status(400).body(new ApiResponse("No attempts for exam with ID: " + id + " found."));
         return ResponseEntity.status(200).body(new ApiResponse("Rate: " + rate + "%"));
     }
@@ -104,11 +104,11 @@ public class ExamController {
         return ResponseEntity.status(200).body(exams);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/get-id/{id}")
     public ResponseEntity<?> getById(@PathVariable String id){
         Exam exam = examService.getById(id);
         if(exam == null)
-            return ResponseEntity.status(404).body("No exam with ID: " + id + " found.");
+            return ResponseEntity.status(404).body(new ApiResponse("No exam with ID: " + id + " found."));
         return ResponseEntity.status(200).body(exam);
     }
 

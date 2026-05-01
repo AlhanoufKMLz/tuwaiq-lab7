@@ -112,7 +112,7 @@ public class CourseController {
         return ResponseEntity.status(200).body(mostLiked);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/get-id/{id}")
     public ResponseEntity<?> getById(@PathVariable String id){
         Course course = courseService.getById(id);
         if(course == null)

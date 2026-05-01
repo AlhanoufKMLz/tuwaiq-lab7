@@ -48,7 +48,7 @@ public class StudentService {
         for(Student e: students){
             if(e.getId().equalsIgnoreCase(id)){
                 if(e.getTotalAttempts() == 0)
-                    return 0;
+                    return -2;
                 return (double) e.getPassedExams() / e.getTotalAttempts() * 100;
             }
         }

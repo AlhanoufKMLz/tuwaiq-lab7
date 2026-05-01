@@ -93,8 +93,8 @@ public class QuestionController {
         return ResponseEntity.status(200).body(trueFalseQuestions);
     }
 
-    @GetMapping("/get-difficulty")
-    public ResponseEntity<?> getByDifficulty(String difficulty){
+    @GetMapping("/get-difficulty/{difficulty}")
+    public ResponseEntity<?> getByDifficulty(@PathVariable String difficulty){
         ArrayList<Question> difficultyQuestions = questionService.getByDifficulty(difficulty);
         if(difficultyQuestions == null)
             return ResponseEntity.status(400).body(new ApiResponse("Difficulty must be Easy, Medium or Hard"));
@@ -103,7 +103,7 @@ public class QuestionController {
         return ResponseEntity.status(200).body(difficultyQuestions);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/get-id/{id}")
     public ResponseEntity<?> getById(@PathVariable String id){
         Question question = questionService.getById(id);
         if(question == null)
