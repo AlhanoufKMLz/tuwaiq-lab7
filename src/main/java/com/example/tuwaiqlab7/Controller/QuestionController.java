@@ -2,12 +2,10 @@ package com.example.tuwaiqlab7.Controller;
 
 import com.example.tuwaiqlab7.ApiResponse.ApiResponse;
 import com.example.tuwaiqlab7.Model.Question;
-import com.example.tuwaiqlab7.Model.Student;
 import com.example.tuwaiqlab7.Service.QuestionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
