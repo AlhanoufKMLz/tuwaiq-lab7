@@ -1,10 +1,8 @@
 package com.example.tuwaiqlab7.Service;
 
-import com.example.tuwaiqlab7.Model.Exam;
 import com.example.tuwaiqlab7.Model.Student;
 import org.springframework.stereotype.Service;
 
-import java.util.AbstractList;
 import java.util.ArrayList;
 
 @Service
@@ -97,6 +95,14 @@ public class StudentService {
                 rank++;
         }
         return rank;
+    }
+
+    public Student getById(String id){
+        for(Student s: students){
+            if(s.getId().equalsIgnoreCase(id))
+                return s;
+        }
+        return null;
     }
 
 }

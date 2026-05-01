@@ -113,6 +113,4 @@ public class ExamController {
         return ResponseEntity.status(200).body(exam);
     }
 
-    
-
 }

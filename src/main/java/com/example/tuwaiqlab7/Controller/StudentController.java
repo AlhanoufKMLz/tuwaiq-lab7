@@ -95,6 +95,12 @@ public class StudentController {
         return ResponseEntity.status(200).body(new ApiResponse("Student Rank: " + rank));
     }
 
-
+    @GetMapping("/get/{id}")
+    public ResponseEntity<?> getById(@PathVariable String id){
+        Student student = studentService.getById(id);
+        if(student == null)
+            return ResponseEntity.status(404).body("No student with ID: " + id + " found.");
+        return ResponseEntity.status(200).body(student);
+    }
 
 }
