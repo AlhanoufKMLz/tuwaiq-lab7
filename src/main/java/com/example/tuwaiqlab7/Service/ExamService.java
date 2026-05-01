@@ -49,7 +49,7 @@ public class ExamService {
         for(Exam e: exams){
             if(e.getId().equalsIgnoreCase(id)){
                 if(e.getAttempts() == 0)
-                    return 0;
+                    return -2;
                 return (double) e.getCorrectAttempts() / e.getAttempts() * 100;
             }
         }

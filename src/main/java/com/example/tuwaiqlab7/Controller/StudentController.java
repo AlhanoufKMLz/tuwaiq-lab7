@@ -63,7 +63,7 @@ public class StudentController {
 
         if(rate == -1)
             return ResponseEntity.status(404).body(new ApiResponse("No student with ID: " + id + " found."));
-        if(rate == 0)
+        if(rate == -2)
             return ResponseEntity.status(400).body(new ApiResponse("No attempts for student with ID: " + id + " found."));
         return ResponseEntity.status(200).body(new ApiResponse("Rate: " + rate + "%"));
     }
@@ -93,7 +93,7 @@ public class StudentController {
         return ResponseEntity.status(200).body(new ApiResponse("Student Rank: " + rank));
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/get-id/{id}")
     public ResponseEntity<?> getById(@PathVariable String id){
         Student student = studentService.getById(id);
         if(student == null)
