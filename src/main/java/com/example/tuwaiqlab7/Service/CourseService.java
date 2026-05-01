@@ -44,4 +44,58 @@ public class CourseService {
         }
         return false;
     }
+
+    public boolean watchCourse(String id){
+        for(Course c: courses){
+            if(c.getId().equalsIgnoreCase(id)){
+                c.setViews(c.getViews()+1);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean likeCourse(String id){
+        for(Course c: courses){
+            if(c.getId().equalsIgnoreCase(id)){
+                c.setLikes(c.getLikes()+1);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ArrayList<Course> getCoursesByDurationRange(int min, int max){
+        ArrayList<Course> durationCourses = new ArrayList<>();
+
+        for(Course c: courses){
+            if(c.getDuration() >= min && c.getDuration() <= max)
+                durationCourses.add(c);
+        }
+        return durationCourses;
+    }
+
+    public Course getMostViewedCourse(){
+        if(courses.isEmpty())
+            return null;
+
+        Course mostViewed = courses.get(0);
+        for(Course c: courses){
+            if(c.getViews() > mostViewed.getViews())
+                mostViewed = c;
+        }
+        return mostViewed;
+    }
+
+    public Course getMostLikedCourse(){
+        if(courses.isEmpty())
+            return null;
+
+        Course mostLiked = courses.get(0);
+        for(Course c: courses){
+            if(c.getLikes() > mostLiked.getLikes())
+                mostLiked = c;
+        }
+        return mostLiked;
+    }
 }

@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 @RequestMapping("/api/v1/course")
 @RequiredArgsConstructor
@@ -53,4 +55,44 @@ public class CourseController {
         return ResponseEntity.status(404).body(new ApiResponse("No course with ID: " + id + " found."));
     }
 
+    //EXTRA ENDPOINTS
+    @PutMapping("/watch/{id}")
+    public ResponseEntity<?> watchCourse(@PathVariable String id){
+        boolean isDone = courseService.watchCourse(id);
+        if (isDone)
+            return ResponseEntity.status(200).body(new ApiResponse("Course watched successfully"));
+        return ResponseEntity.status(404).body(new ApiResponse("No course with ID: " + id + " found."));
+    }
+
+    @PutMapping("/like/{id}")
+    public ResponseEntity<?> likeCourse(@PathVariable String id){
+        boolean isDone = courseService.likeCourse(id);
+        if (isDone)
+            return ResponseEntity.status(200).body(new ApiResponse("Course liked successfully"));
+        return ResponseEntity.status(404).body(new ApiResponse("No course with ID: " + id + " found."));
+    }
+
+    @GetMapping("/get-duration/{min}/{max}")
+    public ResponseEntity<?> getCoursesByDurationRange(@PathVariable int min, @PathVariable int max){
+        ArrayList<Course> durationCourses = courseService.getCoursesByDurationRange(min, max);
+        if(durationCourses.isEmpty())
+            return ResponseEntity.status(404).body(new ApiResponse("No courses with duration in the rage: (" + min + ", " + max + ") found"));
+        return ResponseEntity.status(200).body(durationCourses);
+    }
+
+    @GetMapping("/get-most-viewed")
+    public ResponseEntity<?> getMostViewedCourse(){
+        Course mostViewed = courseService.getMostViewedCourse();
+        if(mostViewed == null)
+            ResponseEntity.status(404).body(new ApiResponse("No Courses found."));
+        return ResponseEntity.status(200).body(mostViewed);
+    }
+
+    @GetMapping("/get-most-liked")
+    public ResponseEntity<?> getMostLikedCourse(){
+        Course mostLiked = courseService.getMostLikedCourse();
+        if(mostLiked == null)
+            ResponseEntity.status(404).body(new ApiResponse("No Courses found."));
+        return ResponseEntity.status(200).body(mostLiked);
+    }
 }
