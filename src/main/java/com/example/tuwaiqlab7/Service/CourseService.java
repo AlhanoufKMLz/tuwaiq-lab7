@@ -74,6 +74,26 @@ public class CourseService {
         return durationCourses;
     }
 
+    public ArrayList<Course> getCoursesByViewsRange(int min, int max){
+        ArrayList<Course> viewsCourses = new ArrayList<>();
+
+        for(Course c: courses){
+            if(c.getViews() >= min && c.getViews() <= max)
+                viewsCourses.add(c);
+        }
+        return viewsCourses;
+    }
+
+    public ArrayList<Course> getCoursesByLikesRange(int min, int max){
+        ArrayList<Course> likesCourses = new ArrayList<>();
+
+        for(Course c: courses){
+            if(c.getLikes() >= min && c.getLikes() <= max)
+                likesCourses.add(c);
+        }
+        return likesCourses;
+    }
+
     public Course getMostViewedCourse(){
         if(courses.isEmpty())
             return null;
@@ -96,5 +116,13 @@ public class CourseService {
                 mostLiked = c;
         }
         return mostLiked;
+    }
+
+    public Course getById(String id){
+        for(Course c: courses){
+            if(c.getId().equalsIgnoreCase(id))
+                return c;
+        }
+        return null;
     }
 }

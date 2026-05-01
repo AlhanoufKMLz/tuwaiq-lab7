@@ -80,11 +80,27 @@ public class CourseController {
         return ResponseEntity.status(200).body(durationCourses);
     }
 
+    @GetMapping("/get-views/{min}/{max}")
+    public ResponseEntity<?> getCoursesByViewsRange(@PathVariable int min, @PathVariable int max){
+        ArrayList<Course> viewsCourses = courseService.getCoursesByViewsRange(min, max);
+        if(viewsCourses.isEmpty())
+            return ResponseEntity.status(404).body(new ApiResponse("No courses with views in the rage: (" + min + ", " + max + ") found"));
+        return ResponseEntity.status(200).body(viewsCourses);
+    }
+
+    @GetMapping("/get-likes/{min}/{max}")
+    public ResponseEntity<?> getCoursesByLikesRange(@PathVariable int min, @PathVariable int max){
+        ArrayList<Course> likesCourses = courseService.getCoursesByLikesRange(min, max);
+        if(likesCourses.isEmpty())
+            return ResponseEntity.status(404).body(new ApiResponse("No courses with likes in the rage: (" + min + ", " + max + ") found"));
+        return ResponseEntity.status(200).body(likesCourses);
+    }
+
     @GetMapping("/get-most-viewed")
     public ResponseEntity<?> getMostViewedCourse(){
         Course mostViewed = courseService.getMostViewedCourse();
         if(mostViewed == null)
-            ResponseEntity.status(404).body(new ApiResponse("No Courses found."));
+            return ResponseEntity.status(404).body(new ApiResponse("No Courses found."));
         return ResponseEntity.status(200).body(mostViewed);
     }
 
@@ -92,7 +108,15 @@ public class CourseController {
     public ResponseEntity<?> getMostLikedCourse(){
         Course mostLiked = courseService.getMostLikedCourse();
         if(mostLiked == null)
-            ResponseEntity.status(404).body(new ApiResponse("No Courses found."));
+            return ResponseEntity.status(404).body(new ApiResponse("No Courses found."));
         return ResponseEntity.status(200).body(mostLiked);
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<?> getById(@PathVariable String id){
+        Course course = courseService.getById(id);
+        if(course == null)
+            return ResponseEntity.status(404).body("No course with ID: " + id + " found.");
+        return ResponseEntity.status(200).body(course);
     }
 }
