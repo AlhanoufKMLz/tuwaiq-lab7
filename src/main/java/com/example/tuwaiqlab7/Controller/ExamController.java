@@ -2,6 +2,7 @@ package com.example.tuwaiqlab7.Controller;
 
 
 import com.example.tuwaiqlab7.ApiResponse.ApiResponse;
+import com.example.tuwaiqlab7.Model.Course;
 import com.example.tuwaiqlab7.Model.Exam;
 import com.example.tuwaiqlab7.Service.ExamService;
 import jakarta.validation.Valid;
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/v1/exam")
@@ -92,6 +95,22 @@ public class ExamController {
         if(hardestExam == null)
             return ResponseEntity.status(404).body(new ApiResponse("No exam with subject: " + subject + " found."));
         return ResponseEntity.status(200).body(hardestExam);
+    }
+
+    @GetMapping("/get-questions/{count}")
+    public ResponseEntity<?> getByNumberOfQuestions(@PathVariable int count){
+        ArrayList<Exam> exams = examService.getByNumberOfQuestions(count);
+        if(exams.isEmpty())
+            return ResponseEntity.status(404).body(new ApiResponse("No exams with number of questions: " + count + " found"));
+        return ResponseEntity.status(200).body(exams);
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<?> getById(@PathVariable String id){
+        Exam exam = examService.getById(id);
+        if(exam == null)
+            return ResponseEntity.status(404).body("No exam with ID: " + id + " found.");
+        return ResponseEntity.status(200).body(exam);
     }
 
     

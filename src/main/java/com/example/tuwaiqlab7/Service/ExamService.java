@@ -110,4 +110,21 @@ public class ExamService {
         }
         return hardest;
     }
+
+    public ArrayList<Exam> getByNumberOfQuestions(int count){
+        ArrayList<Exam> exams1 = new ArrayList<>();
+        for(Exam e: exams){
+            if(e.getQuestions().size() == count)
+                exams1.add(e);
+        }
+        return exams1;
+    }
+
+    public Exam getById(String id){
+        for(Exam e: exams){
+            if(e.getId().equalsIgnoreCase(id))
+                return e;
+        }
+        return null;
+    }
 }
