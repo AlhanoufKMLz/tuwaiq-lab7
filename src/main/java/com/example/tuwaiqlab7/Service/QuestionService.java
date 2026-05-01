@@ -86,4 +86,24 @@ public class QuestionService {
         return trueFalseQuestions;
     }
 
+    public ArrayList<Question> getByDifficulty(String difficulty){
+        if(!difficulty.equalsIgnoreCase("Easy") && !difficulty.equalsIgnoreCase("Medium") && !difficulty.equalsIgnoreCase("Hard") )
+            return null;
+
+        ArrayList<Question> difficultyQuestions = new ArrayList<>();
+        for(Question q: questions){
+            if(q.getDifficulty().equalsIgnoreCase(difficulty))
+                difficultyQuestions.add(q);
+        }
+        return difficultyQuestions;
+    }
+
+    public Question getById(String id){
+        for(Question q: questions){
+            if(q.getId().equalsIgnoreCase(id))
+                return q;
+        }
+        return null;
+    }
+
 }

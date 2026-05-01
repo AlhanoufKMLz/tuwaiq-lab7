@@ -1,8 +1,6 @@
 package com.example.tuwaiqlab7.Controller;
 
 import com.example.tuwaiqlab7.ApiResponse.ApiResponse;
-import com.example.tuwaiqlab7.Model.Course;
-import com.example.tuwaiqlab7.Model.Exam;
 import com.example.tuwaiqlab7.Model.Student;
 import com.example.tuwaiqlab7.Service.StudentService;
 import jakarta.validation.Valid;

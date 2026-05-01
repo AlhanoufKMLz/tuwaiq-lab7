@@ -2,10 +2,12 @@ package com.example.tuwaiqlab7.Controller;
 
 import com.example.tuwaiqlab7.ApiResponse.ApiResponse;
 import com.example.tuwaiqlab7.Model.Question;
+import com.example.tuwaiqlab7.Model.Student;
 import com.example.tuwaiqlab7.Service.QuestionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -89,6 +91,24 @@ public class QuestionController {
         if(trueFalseQuestions.isEmpty())
             return ResponseEntity.status(404).body(new ApiResponse("No true false questions found"));
         return ResponseEntity.status(200).body(trueFalseQuestions);
+    }
+
+    @GetMapping("/get-difficulty")
+    public ResponseEntity<?> getByDifficulty(String difficulty){
+        ArrayList<Question> difficultyQuestions = questionService.getByDifficulty(difficulty);
+        if(difficultyQuestions == null)
+            return ResponseEntity.status(400).body(new ApiResponse("Difficulty must be Easy, Medium or Hard"));
+        if(difficultyQuestions.isEmpty())
+            return ResponseEntity.status(404).body(new ApiResponse("No questions with difficulty: " + difficulty + " found"));
+        return ResponseEntity.status(200).body(difficultyQuestions);
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<?> getById(@PathVariable String id){
+        Question question = questionService.getById(id);
+        if(question == null)
+            return ResponseEntity.status(404).body("No question with ID: " + id + " found.");
+        return ResponseEntity.status(200).body(question);
     }
 
 }
